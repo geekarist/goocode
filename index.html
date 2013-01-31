@@ -11,15 +11,7 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDodMSvFmUnsfVargJMsbvZkLugyknkJO0&sensor=false">
   </script>
   <script type="text/javascript">
-  function initialize() {
-    var mapOptions = {
-      center: new google.maps.LatLng(48.87079, 2.31689),
-      zoom: 11,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-    var address = 'Paris';
+  function showLocation(address, map) {
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
@@ -32,6 +24,22 @@
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
+  }
+
+  function createMap() {
+    var mapOptions = {
+      center: new google.maps.LatLng(48.87079, 2.31689),
+      zoom: 12,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+    return map;
+  }
+
+  function initialize() {
+    var map = createMap();
+    showLocation('Paris', map);
+    showLocation('156 bd haussmann, paris', map);
   }
   </script>
 </head>
